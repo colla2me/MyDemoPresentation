@@ -17,7 +17,9 @@
 @property (nonatomic, assign) CGFloat scrollAreaBottom;
 @property (nonatomic, assign) CGFloat spaceAtTopForBackgroundView;
 @property (nonatomic, assign) BOOL spaceAtTopShouldSnap;
+@property (nonatomic, assign) BOOL scrollStopCardsAtTop;
 @property (nonatomic, assign) BOOL scrollShouldSnapCardHead;
+@property (nonatomic, assign) BOOL cardShouldStretchAtScrollTop;
 @property (nonatomic, assign) NSInteger collectionViewItemCount;
 @property (nonatomic, assign) CGSize cardCollectionCellSize;
 @property (nonatomic, strong) NSMutableArray<CardLayoutAttributes *> *cardCollectionViewLayoutAttributes;
@@ -26,6 +28,13 @@
 @end
 
 @implementation WalletLayout
+
+- (NSMutableArray<NSIndexPath *> *)collectionViewDeletedIndexPaths {
+    if (!_collectionViewDeletedIndexPaths) {
+        _collectionViewDeletedIndexPaths = [NSMutableArray array];
+    }
+    return _collectionViewDeletedIndexPaths;
+}
 
 - (UIEdgeInsets)contentInset {
     if (@available(iOS 11, *)) {
@@ -44,35 +53,61 @@
 }
 
 - (CGSize)generateCellSize {
-    CGFloat width = self.collectionView.frame.size.width - (self.contentInset.left + self.contentInset.right);
-    CGFloat maxHeight = self.collectionView.frame.size.height - (10 * 5 - (self.contentInset.top + self.contentInsetBottom) - 2);
-    return CGSizeMake(width, maxHeight);
+    CGFloat width = CGRectGetWidth(self.collectionView.frame) - (self.contentInset.left + self.contentInset.right);
+    CGFloat height = CGRectGetHeight(self.collectionView.frame) - (10 * 5 - (self.contentInset.top + self.contentInsetBottom) - 2);
+    return CGSizeMake(width, height);
+}
+
+- (void)generateNonRevealedCardsAttribute:(CardLayoutAttributes *)attribute {
+    NSInteger startIndex = (self.contentOffsetTop - self.spaceAtTopForBackgroundView) / self.cardHeadHeight;
+    NSInteger currentIndex = attribute.indexPath.item;
+    
+    CGRect currentFrame = CGRectMake(0, self.spaceAtTopForBackgroundView + self.cardHeadHeight * currentIndex, self.cardCollectionCellSize.width, self.cardCollectionCellSize.height);
+    
+    if(self.contentOffsetTop >= 0 && self.contentOffsetTop <= self.spaceAtTopForBackgroundView) {
+        attribute.frame = currentFrame;
+    } else if(self.contentOffsetTop > self.spaceAtTopForBackgroundView) {
+        if (self.scrollStopCardsAtTop && ((currentIndex != 0 && currentIndex <= startIndex) || (currentIndex == 0 && (self.contentOffsetTop - self.spaceAtTopForBackgroundView) > 0))) {
+            CGRect newFrame = currentFrame;
+            newFrame.origin.y = self.contentOffsetTop;
+            attribute.frame = newFrame;
+        } else {
+            attribute.frame = currentFrame;
+        }
+    } else {
+        if(self.cardShouldStretchAtScrollTop) {
+            CGRect newFrame = currentFrame;
+            CGFloat stretchMultiplier = 1 + (currentIndex + 1) * -0.2;
+            newFrame.origin.y = currentFrame.origin.y + self.contentOffsetTop * stretchMultiplier;
+            attribute.frame = newFrame;
+        } else {
+            attribute.frame = currentFrame;
+        }
+    }
 }
 
 - (NSMutableArray<CardLayoutAttributes *> *)generateCardCollectionViewLayoutAttributes {
     NSMutableArray<CardLayoutAttributes *> *cardLayoutAttributes = [NSMutableArray array];
     
-//    NSInteger startIndex = (self.collectionView.contentOffset.y + self.contentInset.top - self.spaceAtTopForBackgroundView) / self.cardHeadHeight - 10;
-//    NSInteger endBeforeIndex = (self.collectionView.contentOffset.y + self.collectionView.frame.size.height) / self.cardHeadHeight + 5;
-//
-//    if(startIndex < 0) {
-//        startIndex = 0;
-//    }
-//
-//    if(endBeforeIndex > self.collectionViewItemCount) {
-//        endBeforeIndex = self.collectionViewItemCount;
-//    }
+    NSInteger startIndex = (self.collectionView.contentOffset.y + self.contentInset.top - self.spaceAtTopForBackgroundView) / self.cardHeadHeight - 10;
     
-    for (NSUInteger itemIndex = 0; itemIndex < _collectionViewItemCount; itemIndex++) {
+    NSInteger endBeforeIndex = (self.collectionView.contentOffset.y + self.collectionView.frame.size.height) / self.cardHeadHeight + 5;
+
+    if(startIndex < 0) {
+        startIndex = 0;
+    }
+
+    if(endBeforeIndex > self.collectionViewItemCount) {
+        endBeforeIndex = self.collectionViewItemCount;
+    }
+    
+    for (NSUInteger itemIndex = startIndex; itemIndex < endBeforeIndex; itemIndex++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
         CardLayoutAttributes *cardLayoutAttribute = [CardLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+        cardLayoutAttribute.isRevealed = NO;
         cardLayoutAttribute.zIndex = itemIndex;
         
-        CGRect currentFrame = CGRectMake(0, self.spaceAtTopForBackgroundView + self.cardHeadHeight * itemIndex, self.cardCollectionCellSize.width, self.cardCollectionCellSize.height);
-        
-        CGFloat stretchMultiplier = 1 + (itemIndex + 1) * -0.2;
-        currentFrame.origin.y = currentFrame.origin.y + self.contentOffsetTop * stretchMultiplier;
-        cardLayoutAttribute.frame = currentFrame;
+        [self generateNonRevealedCardsAttribute:cardLayoutAttribute];
         
         if (itemIndex < cardLayoutAttributes.count) {
             cardLayoutAttributes[itemIndex] = cardLayoutAttribute;
@@ -97,9 +132,10 @@
     self.scrollAreaTop = 120;
     self.scrollAreaBottom = 120;
     self.spaceAtTopShouldSnap = YES;
-    self.scrollShouldSnapCardHead = NO;
-    self.spaceAtTopForBackgroundView = 0;
-    self.collectionViewDeletedIndexPaths = [NSMutableArray array];
+    self.scrollStopCardsAtTop = YES;
+    self.scrollShouldSnapCardHead = YES;
+    self.cardShouldStretchAtScrollTop = YES;
+    self.spaceAtTopForBackgroundView = 40;
     self.collectionViewItemCount = [self.collectionView numberOfItemsInSection:0];
     self.cardCollectionCellSize = [self generateCellSize];
     self.cardCollectionViewLayoutAttributes = [self generateCardCollectionViewLayoutAttributes];
@@ -116,7 +152,7 @@
             [attributes addObject:layout];
         }
     }
-    return attributes;
+    return attributes.copy;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
@@ -156,7 +192,6 @@
     }
     return proposedContentOffset;
 }
-
 
 - (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
     [super prepareForCollectionViewUpdates:updateItems];

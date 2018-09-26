@@ -20,6 +20,7 @@
         _textLabel = [[UILabel alloc] init];
         _textLabel.textColor = [UIColor whiteColor];
         _textLabel.font = [UIFont systemFontOfSize:16];
+        _textLabel.frame = CGRectMake(40, 20, frame.size.width - 60, 40);
         [self.contentView addSubview:_textLabel];
     }
     return self;
