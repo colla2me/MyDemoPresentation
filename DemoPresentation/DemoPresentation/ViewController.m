@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "CardCell.h"
 #import "WalletLayout.h"
+#import "FVSmsCodeView.h"
+#import "Masonry.h"
 
 #ifndef HEXColor
 #define HEXColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -17,43 +19,78 @@
 @interface ViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *cellInfo;
+@property (nonatomic, weak) FVSmsCodeView *smsCodeView;
 @end
 
 @implementation ViewController
 
 static NSString * const reuseIdentifier = @"CardCell";
 
+- (IBAction)addAction:(id)sender {
+//    self.smsCodeView
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的";
     
-    WalletLayout *layout = [[WalletLayout alloc] init];
-    layout.itemSize = CGSizeMake(CGRectGetWidth(self.view.bounds), 200);
-    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    self.collectionView.contentInset = UIEdgeInsetsMake(120, 0, 0, 0);
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    [self.collectionView registerClass:[CardCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    [self.view addSubview:self.collectionView];
-    
-    self.cellInfo = @[@{@"text": @"会员信息", @"color": HEXColor(0xfcc630)}, @{@"text": @"实体店铺", @"color": HEXColor(0xf8a032)}, @{@"text": @"我的奖品", @"color": HEXColor(0xf58b33)}, @{@"text": @"邀请好友", @"color": HEXColor(0xf47435)}, @{@"text": @"系统设置", @"color": [UIColor redColor]}, @{@"text": @"积分商城", @"color": [UIColor greenColor]}, @{@"text": @"每日生鲜", @"color": [UIColor magentaColor]}, @{@"text": @"配送到家", @"color": [UIColor yellowColor]}];
-    [self.collectionView reloadData];
-    
+//    WalletLayout *layout = [[WalletLayout alloc] init];
+//    layout.itemSize = CGSizeMake(CGRectGetWidth(self.view.bounds), 200);
+//    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+//    self.collectionView.contentInset = UIEdgeInsetsMake(120, 0, 0, 0);
+//    self.collectionView.backgroundColor = [UIColor whiteColor];
+//    self.collectionView.dataSource = self;
+//    self.collectionView.delegate = self;
+//    [self.collectionView registerClass:[CardCell class] forCellWithReuseIdentifier:reuseIdentifier];
+//    [self.view addSubview:self.collectionView];
+//
+//    self.cellInfo = @[@{@"text": @"会员信息", @"color": HEXColor(0xfcc630)}, @{@"text": @"实体店铺", @"color": HEXColor(0xf8a032)}, @{@"text": @"我的奖品", @"color": HEXColor(0xf58b33)}, @{@"text": @"邀请好友", @"color": HEXColor(0xf47435)}, @{@"text": @"系统设置", @"color": [UIColor redColor]}, @{@"text": @"积分商城", @"color": [UIColor greenColor]}, @{@"text": @"每日生鲜", @"color": [UIColor magentaColor]}, @{@"text": @"配送到家", @"color": [UIColor yellowColor]}];
+//    [self.collectionView reloadData];
+//
     CGRect frame = CGRectMake(CGRectGetMidX(self.view.frame) - 30, 30 + CGRectGetMaxY(self.navigationController.navigationBar.frame), 60, 60);
     UIImageView *avatarView = [[UIImageView alloc] initWithFrame:frame];
     avatarView.backgroundColor = [UIColor purpleColor];
     avatarView.layer.cornerRadius = 30;
     [self.view addSubview:avatarView];
-    
+
     CGRect rect = CGRectMake(CGRectGetMidX(self.view.frame) - 100, CGRectGetMaxY(avatarView.frame) + 8, 200, 20);
     UILabel *textLabel = [[UILabel alloc] initWithFrame:rect];
     textLabel.text = @"XXXX昵称";
     textLabel.font = [UIFont systemFontOfSize:16];
     textLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:textLabel];
+
+    FVSmsCodeView *smsCodeView = [[FVSmsCodeView alloc] init];
+    [self.view addSubview:smsCodeView];
+    self.smsCodeView = smsCodeView;
+    smsCodeView.completion = ^(NSString *smsCode) {
+        NSLog(@"smsCode: %@", smsCode);
+    };
+    [smsCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(textLabel.mas_bottom).offset(30);
+        make.centerX.equalTo(self.view);
+    }];
     
     NSLog(@"fmod: %f", fmod(8.625, 0.75));
+    
+    NSString *URLString = @"http://h5.v2.szshifan.com/#/articleShare?videoId=36&accountId=0";
+   
+    NSDictionary *dic = [self queryComponents:[URLString componentsSeparatedByString:@"?"].lastObject];
+    
+    NSLog(@"dic=%@", dic);
+}
+
+- (NSDictionary *)queryComponents:(NSString *)query {
+    NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
+    NSArray<NSString *> *pairs = [query componentsSeparatedByString:@"&"];
+    for (NSString *pair in pairs) {
+        NSArray *keyValues = [pair componentsSeparatedByString:@"="];
+        if (keyValues.count < 2) continue;
+        NSString *key = keyValues.firstObject;
+        NSString *value = keyValues.lastObject;
+        queryItems[key] = value;
+    }
+    return queryItems;
 }
 
 - (void)viewDidLayoutSubviews {

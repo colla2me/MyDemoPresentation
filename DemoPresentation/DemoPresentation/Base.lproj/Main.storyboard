@@ -20,7 +20,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qQ1-Hb-Ox3"/>
+                    <navigationItem key="navigationItem" id="qQ1-Hb-Ox3">
+                        <barButtonItem key="rightBarButtonItem" title="add" id="dhf-8G-7N6">
+                            <connections>
+                                <action selector="addAction:" destination="BYZ-38-t0r" id="CRP-Sr-Wg5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
