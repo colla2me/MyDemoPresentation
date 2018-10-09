@@ -10,6 +10,7 @@
 #import "CardLayoutAttributes.h"
 
 @interface WalletLayout ()
+@property (nonatomic, assign) NSInteger revealedIndex;
 
 @property (nonatomic, assign) CGFloat cardHeadHeight;
 @property (nonatomic, assign) CGFloat spaceAtBottom;
@@ -20,6 +21,7 @@
 @property (nonatomic, assign) BOOL scrollStopCardsAtTop;
 @property (nonatomic, assign) BOOL scrollShouldSnapCardHead;
 @property (nonatomic, assign) BOOL cardShouldStretchAtScrollTop;
+@property (nonatomic, assign) BOOL collectionViewIsInitialized;
 @property (nonatomic, assign) NSInteger collectionViewItemCount;
 @property (nonatomic, assign) CGSize cardCollectionCellSize;
 @property (nonatomic, strong) NSMutableArray<CardLayoutAttributes *> *cardCollectionViewLayoutAttributes;
@@ -28,6 +30,22 @@
 @end
 
 @implementation WalletLayout
+
+- (void)revealCardAtIndex:(NSInteger)index {
+    if (self.revealedIndex == index) return;
+    self.revealedIndex = index;
+    self.collectionView.scrollEnabled = NO;
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView reloadData];
+    } completion:^(BOOL finished) {
+        self.revealedIndex = -1;
+        [self.collectionView performBatchUpdates:^{
+            [self.collectionView reloadData];
+        } completion:^(BOOL finished) {
+            self.collectionView.scrollEnabled = YES;
+        }];
+    }];
+}
 
 - (NSMutableArray<NSIndexPath *> *)collectionViewDeletedIndexPaths {
     if (!_collectionViewDeletedIndexPaths) {
@@ -58,7 +76,9 @@
     return CGSizeMake(width, height);
 }
 
-- (void)generateNonRevealedCardsAttribute:(CardLayoutAttributes *)attribute {
+- (void)generateUnrevealedCardsAttribute:(CardLayoutAttributes *)attribute {
+    attribute.isRevealed = NO;
+    
     NSInteger startIndex = (self.contentOffsetTop - self.spaceAtTopForBackgroundView) / self.cardHeadHeight;
     NSInteger currentIndex = attribute.indexPath.item;
     
@@ -86,10 +106,17 @@
     }
 }
 
+- (void)generateRevealedCardsAttribute:(CardLayoutAttributes *)attribute {
+    attribute.isRevealed = YES;
+    CGRect frame = CGRectMake(0, self.spaceAtTopForBackgroundView + self.cardHeadHeight * self.revealedIndex, self.cardCollectionCellSize.width, self.cardCollectionCellSize.height);;
+    frame.origin.y -= self.cardHeadHeight * 0.2;
+    attribute.frame = frame;
+}
+
 - (NSMutableArray<CardLayoutAttributes *> *)generateCardCollectionViewLayoutAttributes {
     NSMutableArray<CardLayoutAttributes *> *cardLayoutAttributes = [NSMutableArray array];
     
-    NSInteger startIndex = (self.collectionView.contentOffset.y + self.contentInset.top - self.spaceAtTopForBackgroundView) / self.cardHeadHeight - 10;
+    NSInteger startIndex = (self.collectionView.contentOffset.y + self.contentInset.top - self.spaceAtTopForBackgroundView) / self.cardHeadHeight - 5;
     
     NSInteger endBeforeIndex = (self.collectionView.contentOffset.y + self.collectionView.frame.size.height) / self.cardHeadHeight + 5;
 
@@ -104,10 +131,13 @@
     for (NSUInteger itemIndex = startIndex; itemIndex < endBeforeIndex; itemIndex++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
         CardLayoutAttributes *cardLayoutAttribute = [CardLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-        cardLayoutAttribute.isRevealed = NO;
         cardLayoutAttribute.zIndex = itemIndex;
         
-        [self generateNonRevealedCardsAttribute:cardLayoutAttribute];
+        if (self.revealedIndex >= 0 && self.revealedIndex == itemIndex) {
+            [self generateRevealedCardsAttribute:cardLayoutAttribute];
+        } else {
+            [self generateUnrevealedCardsAttribute:cardLayoutAttribute];
+        }
         
         if (itemIndex < cardLayoutAttributes.count) {
             cardLayoutAttributes[itemIndex] = cardLayoutAttribute;
@@ -127,18 +157,23 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
-    self.spaceAtBottom = 120;
-    self.cardHeadHeight = 80;
-    self.scrollAreaTop = 120;
-    self.scrollAreaBottom = 120;
-    self.spaceAtTopShouldSnap = YES;
-    self.scrollStopCardsAtTop = YES;
-    self.scrollShouldSnapCardHead = YES;
-    self.cardShouldStretchAtScrollTop = YES;
-    self.spaceAtTopForBackgroundView = 40;
-    self.collectionViewItemCount = [self.collectionView numberOfItemsInSection:0];
-    self.cardCollectionCellSize = [self generateCellSize];
-    self.cardCollectionViewLayoutAttributes = [self generateCardCollectionViewLayoutAttributes];
+    if (!_collectionViewIsInitialized) {
+        _collectionViewIsInitialized = YES;
+        _revealedIndex = -1;
+        _spaceAtBottom = 120;
+        _cardHeadHeight = 80;
+        _scrollAreaTop = 120;
+        _scrollAreaBottom = 120;
+        _spaceAtTopShouldSnap = YES;
+        _scrollStopCardsAtTop = YES;
+        _scrollShouldSnapCardHead = YES;
+        _cardShouldStretchAtScrollTop = YES;
+        _spaceAtTopForBackgroundView = 180;
+        _collectionViewItemCount = [self.collectionView numberOfItemsInSection:0];
+    }
+    
+    _cardCollectionCellSize = [self generateCellSize];
+    _cardCollectionViewLayoutAttributes = [self generateCardCollectionViewLayoutAttributes];
 }
 
 - (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath; {
@@ -193,59 +228,30 @@
     return proposedContentOffset;
 }
 
-- (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
-    [super prepareForCollectionViewUpdates:updateItems];
-    [self.collectionViewDeletedIndexPaths removeAllObjects];
-    for (UICollectionViewUpdateItem *updateItem in updateItems) {
-        switch (updateItem.updateAction) {
-            case UICollectionUpdateActionDelete: {
-                if (updateItem.indexPathBeforeUpdate) {
-                    [self.collectionViewDeletedIndexPaths addObject:updateItem.indexPathBeforeUpdate];
-                }
-                break;
-            }
-            default:
-                break;
-        }
-    }
-}
+//- (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
+//    [super prepareForCollectionViewUpdates:updateItems];
+//    [self.collectionViewDeletedIndexPaths removeAllObjects];
+//    for (UICollectionViewUpdateItem *updateItem in updateItems) {
+//        switch (updateItem.updateAction) {
+//            case UICollectionUpdateActionDelete: {
+//                if (updateItem.indexPathBeforeUpdate) {
+//                    [self.collectionViewDeletedIndexPaths addObject:updateItem.indexPathBeforeUpdate];
+//                }
+//                break;
+//            }
+//            default:
+//                break;
+//        }
+//    }
+//}
 
-- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
-    UICollectionViewLayoutAttributes *attrs = [super finalLayoutAttributesForDisappearingItemAtIndexPath:itemIndexPath];
-    if ([self.collectionViewDeletedIndexPaths containsObject:itemIndexPath]) {
-        attrs.alpha = 0.0;
-        attrs.transform3D = CATransform3DScale(attrs.transform3D, 0.001, 0.001, 1);
-    }
-    return attrs;
-}
+//- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
+//    UICollectionViewLayoutAttributes *attrs = [super finalLayoutAttributesForDisappearingItemAtIndexPath:itemIndexPath];
+//    if ([self.collectionViewDeletedIndexPaths containsObject:itemIndexPath]) {
+//        attrs.alpha = 0.0;
+//        attrs.transform3D = CATransform3DScale(attrs.transform3D, 0.001, 0.001, 1);
+//    }
+//    return attrs;
+//}
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -10,4 +10,8 @@
 
 @interface WalletLayout : UICollectionViewFlowLayout
 
+- (void)revealCardAtIndex:(NSInteger)index;
+
+//- (void)flipRevealedCard:(UIView *)toView;
+
 @end
