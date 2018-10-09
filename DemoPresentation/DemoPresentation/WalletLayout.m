@@ -34,15 +34,17 @@
 - (void)revealCardAtIndex:(NSInteger)index {
     if (self.revealedIndex == index) return;
     self.revealedIndex = index;
-    self.collectionView.scrollEnabled = NO;
+//    self.collectionView.scrollEnabled = NO;
     [self.collectionView performBatchUpdates:^{
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+//        [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
         [self.collectionView reloadData];
     } completion:^(BOOL finished) {
         self.revealedIndex = -1;
         [self.collectionView performBatchUpdates:^{
             [self.collectionView reloadData];
         } completion:^(BOOL finished) {
-            self.collectionView.scrollEnabled = YES;
+//            self.collectionView.scrollEnabled = YES;
         }];
     }];
 }
@@ -108,6 +110,7 @@
 
 - (void)generateRevealedCardsAttribute:(CardLayoutAttributes *)attribute {
     attribute.isRevealed = YES;
+//    CGRect frame = self.cardCollectionViewLayoutAttributes[self.revealedIndex].frame;
     CGRect frame = CGRectMake(0, self.spaceAtTopForBackgroundView + self.cardHeadHeight * self.revealedIndex, self.cardCollectionCellSize.width, self.cardCollectionCellSize.height);;
     frame.origin.y -= self.cardHeadHeight * 0.2;
     attribute.frame = frame;
