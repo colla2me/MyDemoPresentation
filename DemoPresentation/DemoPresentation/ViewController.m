@@ -24,6 +24,10 @@
 
 static NSString * const reuseIdentifier = @"CardCell";
 
+- (IBAction)addAction:(id)sender {
+//    self.smsCodeView
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的";
@@ -38,14 +42,14 @@ static NSString * const reuseIdentifier = @"CardCell";
     avatarView.layer.cornerRadius = 30;
     [self.view addSubview:avatarView];
     [avatarView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapAvatar)]];
-    
+
     CGRect rect = CGRectMake(CGRectGetMidX(self.view.frame) - 100, CGRectGetMaxY(avatarView.frame) + 8, 200, 20);
     UILabel *textLabel = [[UILabel alloc] initWithFrame:rect];
     textLabel.text = @"XXXX昵称";
     textLabel.font = [UIFont systemFontOfSize:16];
     textLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:textLabel];
-    
+
     CGRect rect1 = CGRectMake(CGRectGetMidX(self.view.frame) * 0.5 - 50, CGRectGetMaxY(textLabel.frame) + 8, 100, 40);
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setFrame:rect1];
