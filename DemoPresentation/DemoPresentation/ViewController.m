@@ -10,6 +10,7 @@
 #import "CardCell.h"
 #import "WalletLayout.h"
 #import "MyCollectionView.h"
+#import "TableViewController.h"
 
 #ifndef HEXColor
 #define HEXColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -114,9 +115,10 @@ static NSString * const reuseIdentifier = @"CardCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"indexPath at: %ld", indexPath.item);
     WalletLayout *layout = (WalletLayout *)collectionView.collectionViewLayout;
     [layout revealCardAtIndex:indexPath.item];
+    
+    [TableViewController presentModalInViewController:self];
 }
 
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7E78FF0C216CDE220013ED9F /* MyCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF0B216CDE220013ED9F /* MyCollectionView.m */; };
+		7E78FF14216D03970013ED9F /* SemiModalPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */; };
+		7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF16216D03B20013ED9F /* TableViewController.m */; };
 		84758D3B215B7A1B00E56BCA /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D3A215B7A1B00E56BCA /* CardCell.m */; };
 		84758D3E215B7A4100E56BCA /* WalletLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D3D215B7A4100E56BCA /* WalletLayout.m */; };
 		84758D41215B82BC00E56BCA /* CardLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D40215B82BC00E56BCA /* CardLayoutAttributes.m */; };
@@ -31,6 +33,10 @@
 /* Begin PBXFileReference section */
 		7E78FF0A216CDE220013ED9F /* MyCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCollectionView.h; sourceTree = "<group>"; };
 		7E78FF0B216CDE220013ED9F /* MyCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectionView.m; sourceTree = "<group>"; };
+		7E78FF12216D03970013ED9F /* SemiModalPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SemiModalPresentationController.h; sourceTree = "<group>"; };
+		7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SemiModalPresentationController.m; sourceTree = "<group>"; };
+		7E78FF15216D03B20013ED9F /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		7E78FF16216D03B20013ED9F /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		84758D39215B7A1B00E56BCA /* CardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardCell.h; sourceTree = "<group>"; };
 		84758D3A215B7A1B00E56BCA /* CardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardCell.m; sourceTree = "<group>"; };
 		84758D3C215B7A4100E56BCA /* WalletLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLayout.h; sourceTree = "<group>"; };
@@ -147,8 +153,12 @@
 				84A39796215F8A1800E9D15F /* Masonry */,
 				84BB7AAC2151E57900B5876B /* AppDelegate.h */,
 				84BB7AAD2151E57900B5876B /* AppDelegate.m */,
+				7E78FF12216D03970013ED9F /* SemiModalPresentationController.h */,
+				7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */,
 				84BB7AAF2151E57900B5876B /* ViewController.h */,
 				84BB7AB02151E57900B5876B /* ViewController.m */,
+				7E78FF15216D03B20013ED9F /* TableViewController.h */,
+				7E78FF16216D03B20013ED9F /* TableViewController.m */,
 				7E78FF0A216CDE220013ED9F /* MyCollectionView.h */,
 				7E78FF0B216CDE220013ED9F /* MyCollectionView.m */,
 				84BB7AB22151E57900B5876B /* Main.storyboard */,
@@ -239,6 +249,7 @@
 				84BB7AB12151E57900B5876B /* ViewController.m in Sources */,
 				7E78FF0C216CDE220013ED9F /* MyCollectionView.m in Sources */,
 				84BB7ABC2151E57B00B5876B /* main.m in Sources */,
+				7E78FF14216D03970013ED9F /* SemiModalPresentationController.m in Sources */,
 				84A397B2215F8A1800E9D15F /* NSArray+MASAdditions.m in Sources */,
 				84A397AE215F8A1800E9D15F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				84A397B6215F8A1800E9D15F /* MASViewAttribute.m in Sources */,
@@ -248,6 +259,7 @@
 				84A397AF215F8A1800E9D15F /* MASCompositeConstraint.m in Sources */,
 				84BB7AAE2151E57900B5876B /* AppDelegate.m in Sources */,
 				84758D3B215B7A1B00E56BCA /* CardCell.m in Sources */,
+				7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */,
 				84758D3E215B7A4100E56BCA /* WalletLayout.m in Sources */,
 				84A397B0215F8A1800E9D15F /* MASConstraintMaker.m in Sources */,
 				84A397B4215F8A1800E9D15F /* MASConstraint.m in Sources */,
