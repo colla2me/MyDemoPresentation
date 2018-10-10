@@ -10,7 +10,6 @@
 
 @interface SemiModalPresentationController () <UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong) UIView *dimmingView;
-@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactionTransition;
 @property (nonatomic, assign) CGFloat percent;
 @end
@@ -202,13 +201,6 @@ static const CGFloat threshold = 0.2;
         _dimmingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
     }
     return _dimmingView;
-}
-
-- (UIPercentDrivenInteractiveTransition *)interactionTransition {
-    if (!_interactionTransition) {
-        _interactionTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
-    }
-    return _interactionTransition;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

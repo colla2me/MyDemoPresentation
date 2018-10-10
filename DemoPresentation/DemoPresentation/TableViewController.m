@@ -42,6 +42,10 @@ static NSString * const reuseCellID = @"reuseCellID";
     [presentingController presentViewController:presentedViewController animated:YES completion:NULL];
 }
 
+- (void)dealloc {
+    [self.view removeGestureRecognizer:self.tableView.panGestureRecognizer];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.preferredContentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) * 0.75);
