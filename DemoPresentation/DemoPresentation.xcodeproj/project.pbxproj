@@ -10,6 +10,7 @@
 		7E78FF0C216CDE220013ED9F /* MyCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF0B216CDE220013ED9F /* MyCollectionView.m */; };
 		7E78FF14216D03970013ED9F /* SemiModalPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */; };
 		7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF16216D03B20013ED9F /* TableViewController.m */; };
+		7EFD6F81216E452200027384 /* AIMultiDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFD6F80216E452200027384 /* AIMultiDelegate.m */; };
 		84758D3B215B7A1B00E56BCA /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D3A215B7A1B00E56BCA /* CardCell.m */; };
 		84758D3E215B7A4100E56BCA /* WalletLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D3D215B7A4100E56BCA /* WalletLayout.m */; };
 		84758D41215B82BC00E56BCA /* CardLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D40215B82BC00E56BCA /* CardLayoutAttributes.m */; };
@@ -37,6 +38,8 @@
 		7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SemiModalPresentationController.m; sourceTree = "<group>"; };
 		7E78FF15216D03B20013ED9F /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		7E78FF16216D03B20013ED9F /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		7EFD6F7F216E452200027384 /* AIMultiDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIMultiDelegate.h; sourceTree = "<group>"; };
+		7EFD6F80216E452200027384 /* AIMultiDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIMultiDelegate.m; sourceTree = "<group>"; };
 		84758D39215B7A1B00E56BCA /* CardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardCell.h; sourceTree = "<group>"; };
 		84758D3A215B7A1B00E56BCA /* CardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardCell.m; sourceTree = "<group>"; };
 		84758D3C215B7A4100E56BCA /* WalletLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLayout.h; sourceTree = "<group>"; };
@@ -100,6 +103,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		7EFD6F7E216E452200027384 /* MultiDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				7EFD6F7F216E452200027384 /* AIMultiDelegate.h */,
+				7EFD6F80216E452200027384 /* AIMultiDelegate.m */,
+			);
+			path = MultiDelegate;
+			sourceTree = "<group>";
+		};
 		84A39796215F8A1800E9D15F /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +162,7 @@
 		84BB7AAB2151E57900B5876B /* DemoPresentation */ = {
 			isa = PBXGroup;
 			children = (
+				7EFD6F7E216E452200027384 /* MultiDelegate */,
 				84A39796215F8A1800E9D15F /* Masonry */,
 				84BB7AAC2151E57900B5876B /* AppDelegate.h */,
 				84BB7AAD2151E57900B5876B /* AppDelegate.m */,
@@ -258,6 +271,7 @@
 				84A397B3215F8A1800E9D15F /* View+MASAdditions.m in Sources */,
 				84A397AF215F8A1800E9D15F /* MASCompositeConstraint.m in Sources */,
 				84BB7AAE2151E57900B5876B /* AppDelegate.m in Sources */,
+				7EFD6F81216E452200027384 /* AIMultiDelegate.m in Sources */,
 				84758D3B215B7A1B00E56BCA /* CardCell.m in Sources */,
 				7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */,
 				84758D3E215B7A4100E56BCA /* WalletLayout.m in Sources */,

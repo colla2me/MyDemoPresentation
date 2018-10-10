@@ -9,25 +9,36 @@
 #import "TableViewController.h"
 #import "Masonry.h"
 #import "SemiModalPresentationController.h"
+#import "AIMultiDelegate.h"
 
 #ifndef RGBA//(r,g,b,a)
 #define RGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.f green:(g)/255.f blue:(b)/255.f alpha:(a)]
 #endif
 
-@interface TableViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface TableViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-//@property (nonatomic, assign) CGFloat maxVisibleContentHeight;
+@property (nonatomic, strong) AIMultiDelegate *multiDelegate;
 @end
 
 @implementation TableViewController
 
 static NSString * const reuseCellID = @"reuseCellID";
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _multiDelegate = [[AIMultiDelegate alloc] init];
+        [_multiDelegate addDelegate:self];
+    }
+    return self;
+}
+
 + (void)presentModalInViewController:(UIViewController *)presentingController {
     TableViewController *presentedViewController = [[TableViewController alloc] init];
     SemiModalPresentationController *presentationController NS_VALID_UNTIL_END_OF_SCOPE;
     presentationController = [[SemiModalPresentationController alloc] initWithPresentedViewController:presentedViewController presentingViewController:presentingController];
     presentedViewController.transitioningDelegate = presentationController;
+    [presentedViewController.multiDelegate addDelegate:presentationController];
     [presentingController presentViewController:presentedViewController animated:YES completion:NULL];
 }
 
@@ -35,7 +46,6 @@ static NSString * const reuseCellID = @"reuseCellID";
     [super viewDidLoad];
     self.preferredContentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) * 0.75);
     self.view.backgroundColor = RGBA(19, 20, 26, 1);
-//    self.maxVisibleContentHeight = self.preferredContentSize.height;
     
     UIBezierPath *roundCorner = [UIBezierPath bezierPathWithRoundedRect:self.view.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
@@ -43,10 +53,8 @@ static NSString * const reuseCellID = @"reuseCellID";
     maskLayer.path = roundCorner.CGPath;
     self.view.layer.mask = maskLayer;
     
-    [self setupTopView];
-    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    self.tableView.delegate = self;
+    self.tableView.delegate = (id)_multiDelegate;
     self.tableView.dataSource = self;
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
@@ -60,14 +68,17 @@ static NSString * const reuseCellID = @"reuseCellID";
     }
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(UIEdgeInsetsMake(40, 0, 0, 0));
+        make.edges.insets(UIEdgeInsetsMake(80, 0, 0, 0));
     }];
     
+    [self.view addGestureRecognizer:self.tableView.panGestureRecognizer];
+    
+    [self setupTopView];
 }
 
 - (void)setupTopView {
-    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40)];
-    topView.backgroundColor = RGBA(19, 20, 26, 1);
+    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 80)];
+    topView.backgroundColor = [UIColor orangeColor]; //RGBA(19, 20, 26, 1);
     [self.view addSubview:topView];
     
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -112,38 +123,30 @@ static NSString * const reuseCellID = @"reuseCellID";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-//    CGFloat targetOffset = targetContentOffset->y;
-//    CGFloat pulledUpOffset = 0;
-//    CGFloat pulledDownOffset = -self.maxVisibleContentHeight;
-//
-//    if (targetOffset >= pulledDownOffset && targetOffset <= pulledUpOffset) {
-//        if (velocity.y < 0) {
-//            targetContentOffset->y = pulledDownOffset;
-//        } else {
-//            targetContentOffset->y = pulledUpOffset;
-//        }
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+//    NSLog(@"gesture begin");
+//    if (self.tableView.contentOffset.y > 1) {
+//        return NO;
 //    }
-//}
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    self.tableView.scrollEnabled = YES;
-    if (self.tableView.contentOffset.y > 1) {
-        return NO;
-    }
-    
+//
 //    CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:self.view];
 //    CGFloat multiplier = 1;
 //    if ((translation.y * multiplier) <= 0) {
+//        NSLog(@"translation up");
 //        return NO;
 //    }
-    self.tableView.scrollEnabled = NO;
-    return YES;
-}
+//    return YES;
+//}
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    NSLog(@"gesture simultaneously");
+//    return YES;
+//}
+
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    NSLog(@"gesture require failure");
+//    return YES;
+//}
 
 @end

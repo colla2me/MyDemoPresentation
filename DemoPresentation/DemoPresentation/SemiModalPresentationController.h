@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SemiModalPresentationController : UIPresentationController <UIViewControllerTransitioningDelegate>
+@interface SemiModalPresentationController : UIPresentationController <UIViewControllerTransitioningDelegate, UIScrollViewDelegate>
 
 @end

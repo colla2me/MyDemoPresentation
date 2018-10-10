@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UIView *dimmingView;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactionTransition;
+@property (nonatomic, assign) CGFloat percent;
 @end
 
 static const NSTimeInterval modalTransitionDuration = 0.3f;
@@ -23,14 +24,6 @@ static const CGFloat threshold = 0.2;
     self = [super initWithPresentedViewController:presentedViewController presentingViewController:presentingViewController];
     if (self) {
         presentedViewController.modalPresentationStyle = UIModalPresentationCustom;
-        // 暂不处理滑动返回
-        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanGesture:)];
-        self.panGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)presentedViewController;
-        [presentedViewController.view addGestureRecognizer:self.panGestureRecognizer];
-//        self.panGestureRecognizer.delaysTouchesBegan = YES;
-//        self.panGestureRecognizer.delaysTouchesEnded = YES;
-        self.panGestureRecognizer.maximumNumberOfTouches = 1;
-//        self.panGestureRecognizer.cancelsTouchesInView = YES;
     }
     return self;
 }
@@ -47,8 +40,7 @@ static const CGFloat threshold = 0.2;
 }
 
 - (void)presentationTransitionDidEnd:(BOOL)completed {
-    if (completed == NO)
-    {
+    if (completed == NO) {
         self.dimmingView = nil;
     }
 }
@@ -87,43 +79,43 @@ static const CGFloat threshold = 0.2;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
 }
 
-
-- (void)onPanGesture:(UIPanGestureRecognizer *)pan {
-    CGPoint translation = [pan translationInView:pan.view];
-    CGFloat dragDistance = CGRectGetHeight(pan.view.frame);
-    CGFloat percent = translation.y / dragDistance;
-    switch (pan.state) {
-        case UIGestureRecognizerStateBegan:
-        {
-            self.interactionTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
-            if (percent > 0) {
-                [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
-            }
-        }
-            break;
-        case UIGestureRecognizerStateChanged:
-        {
-            percent = fmax(percent, 0.0);
-            percent = fmin(percent, 1.0);
-            [self.interactionTransition updateInteractiveTransition:percent];
-        }
-            break;
-        case UIGestureRecognizerStateEnded:
-        {
-            if (percent > threshold) {
-                [self.interactionTransition finishInteractiveTransition];
-            } else {
-                [self.interactionTransition cancelInteractiveTransition];
-            }
-            self.interactionTransition = nil;
-        }
-            break;
-        default:
-            [self.interactionTransition cancelInteractiveTransition];
-            self.interactionTransition = nil;
-            break;
-    }
-}
+//- (void)onPanGesture:(UIPanGestureRecognizer *)pan {
+//    CGPoint translation = [pan translationInView:pan.view];
+//    CGFloat dragDistance = CGRectGetHeight(pan.view.frame);
+//    CGFloat percent = translation.y / dragDistance;
+//    NSLog(@"percent: %.2f", percent);
+//    switch (pan.state) {
+//        case UIGestureRecognizerStateBegan:
+//        {
+//            self.interactionTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
+//            if (percent > 0) {
+//                [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+//            }
+//        }
+//            break;
+//        case UIGestureRecognizerStateChanged:
+//        {
+//            percent = fmax(percent, 0.0);
+//            percent = fmin(percent, 1.0);
+//            [self.interactionTransition updateInteractiveTransition:percent];
+//        }
+//            break;
+//        case UIGestureRecognizerStateEnded:
+//        {
+//            if (percent > threshold) {
+//                [self.interactionTransition finishInteractiveTransition];
+//            } else {
+//                [self.interactionTransition cancelInteractiveTransition];
+//            }
+//            self.interactionTransition = nil;
+//        }
+//            break;
+//        default:
+//            [self.interactionTransition cancelInteractiveTransition];
+//            self.interactionTransition = nil;
+//            break;
+//    }
+//}
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -210,6 +202,47 @@ static const CGFloat threshold = 0.2;
         _dimmingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
     }
     return _dimmingView;
+}
+
+- (UIPercentDrivenInteractiveTransition *)interactionTransition {
+    if (!_interactionTransition) {
+        _interactionTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
+    }
+    return _interactionTransition;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (!scrollView.isDecelerating && scrollView.contentOffset.y <= 0) {
+        self.interactionTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    NSLog(@"DidEndDragging");
+    if (_percent > threshold) {
+        [self.interactionTransition finishInteractiveTransition];
+    } else {
+        [self.interactionTransition cancelInteractiveTransition];
+    }
+    self.interactionTransition = nil;
+    self.percent = 0.0;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGPoint translation = [scrollView.panGestureRecognizer translationInView:self.presentedViewController.view];
+
+    if (_interactionTransition && translation.y > 0) {
+        CGFloat dragDistance = CGRectGetHeight(self.presentedViewController.view.frame);
+        _percent = translation.y / dragDistance;
+        _percent = fmax(_percent, 0.0);
+        _percent = fmin(_percent, 1.0);
+        [self.interactionTransition updateInteractiveTransition:_percent];
+        [scrollView setContentOffset:CGPointZero];
+    }
+    
+    NSLog(@"translation: %.2f, contentOffset: %.2f", translation.y, scrollView.contentOffset.y);
 }
 
 @end
