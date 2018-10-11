@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1F6D76216F9441005CADBE /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F6D71216F9440005CADBE /* SampleViewController.m */; };
+		7E1F6D77216F9441005CADBE /* SampleAlignedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F6D72216F9441005CADBE /* SampleAlignedLayout.m */; };
+		7E1F6D78216F9441005CADBE /* SampleTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F6D75216F9441005CADBE /* SampleTagCell.m */; };
 		7E78FF0C216CDE220013ED9F /* MyCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF0B216CDE220013ED9F /* MyCollectionView.m */; };
 		7E78FF14216D03970013ED9F /* SemiModalPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */; };
 		7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF16216D03B20013ED9F /* TableViewController.m */; };
@@ -32,6 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E1F6D70216F9440005CADBE /* SampleAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAlignedLayout.h; sourceTree = "<group>"; };
+		7E1F6D71216F9440005CADBE /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
+		7E1F6D72216F9441005CADBE /* SampleAlignedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleAlignedLayout.m; sourceTree = "<group>"; };
+		7E1F6D73216F9441005CADBE /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		7E1F6D74216F9441005CADBE /* SampleTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTagCell.h; sourceTree = "<group>"; };
+		7E1F6D75216F9441005CADBE /* SampleTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTagCell.m; sourceTree = "<group>"; };
 		7E78FF0A216CDE220013ED9F /* MyCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCollectionView.h; sourceTree = "<group>"; };
 		7E78FF0B216CDE220013ED9F /* MyCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectionView.m; sourceTree = "<group>"; };
 		7E78FF12216D03970013ED9F /* SemiModalPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SemiModalPresentationController.h; sourceTree = "<group>"; };
@@ -166,6 +175,12 @@
 				84A39796215F8A1800E9D15F /* Masonry */,
 				84BB7AAC2151E57900B5876B /* AppDelegate.h */,
 				84BB7AAD2151E57900B5876B /* AppDelegate.m */,
+				7E1F6D73216F9441005CADBE /* SampleViewController.h */,
+				7E1F6D71216F9440005CADBE /* SampleViewController.m */,
+				7E1F6D70216F9440005CADBE /* SampleAlignedLayout.h */,
+				7E1F6D72216F9441005CADBE /* SampleAlignedLayout.m */,
+				7E1F6D74216F9441005CADBE /* SampleTagCell.h */,
+				7E1F6D75216F9441005CADBE /* SampleTagCell.m */,
 				7E78FF12216D03970013ED9F /* SemiModalPresentationController.h */,
 				7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */,
 				84BB7AAF2151E57900B5876B /* ViewController.h */,
@@ -267,6 +282,8 @@
 				84A397AE215F8A1800E9D15F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				84A397B6215F8A1800E9D15F /* MASViewAttribute.m in Sources */,
 				84758D41215B82BC00E56BCA /* CardLayoutAttributes.m in Sources */,
+				7E1F6D78216F9441005CADBE /* SampleTagCell.m in Sources */,
+				7E1F6D76216F9441005CADBE /* SampleViewController.m in Sources */,
 				84A397B1215F8A1800E9D15F /* MASLayoutConstraint.m in Sources */,
 				84A397B3215F8A1800E9D15F /* View+MASAdditions.m in Sources */,
 				84A397AF215F8A1800E9D15F /* MASCompositeConstraint.m in Sources */,
@@ -275,6 +292,7 @@
 				84758D3B215B7A1B00E56BCA /* CardCell.m in Sources */,
 				7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */,
 				84758D3E215B7A4100E56BCA /* WalletLayout.m in Sources */,
+				7E1F6D77216F9441005CADBE /* SampleAlignedLayout.m in Sources */,
 				84A397B0215F8A1800E9D15F /* MASConstraintMaker.m in Sources */,
 				84A397B4215F8A1800E9D15F /* MASConstraint.m in Sources */,
 				84A397B5215F8A1800E9D15F /* MASViewConstraint.m in Sources */,
