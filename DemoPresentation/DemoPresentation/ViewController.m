@@ -11,12 +11,14 @@
 #import "WalletLayout.h"
 #import "MyCollectionView.h"
 #import "TableViewController.h"
+#import "SlideAnimatedTransitioning.h"
+#import "BottomModalViewController.h"
 
 #ifndef HEXColor
 #define HEXColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #endif
 
-@interface ViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface ViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) MyCollectionView *collectionView;
 @property (nonatomic, strong) NSArray *cellInfo;
 @end
@@ -32,7 +34,9 @@ static NSString * const reuseIdentifier = @"CardCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的";
-
+    self.navigationController.delegate = self;
+//    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.cellInfo = @[@{@"text": @"会员信息", @"color": HEXColor(0xfcc630)}, @{@"text": @"实体店铺", @"color": HEXColor(0xf8a032)}, @{@"text": @"我的奖品", @"color": HEXColor(0xf58b33)}, @{@"text": @"邀请好友", @"color": HEXColor(0xf47435)}, @{@"text": @"系统设置", @"color": [UIColor redColor]}, @{@"text": @"积分商城", @"color": [UIColor greenColor]}, @{@"text": @"每日生鲜", @"color": [UIColor magentaColor]}, @{@"text": @"配送到家", @"color": [UIColor yellowColor]}];
     [self.collectionView reloadData];
     
@@ -118,7 +122,17 @@ static NSString * const reuseIdentifier = @"CardCell";
     WalletLayout *layout = (WalletLayout *)collectionView.collectionViewLayout;
     [layout revealCardAtIndex:indexPath.item];
     
-    [TableViewController presentModalInViewController:self];
+//    [TableViewController presentModalInViewController:self];
+    BottomModalViewController *vc = [[BottomModalViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
+{
+    SlideAnimatedTransitioning *transitioning = [[SlideAnimatedTransitioning alloc] init];
+    transitioning.fromType = SlideAnimatedTransitioningFromBottom;
+    transitioning.operationType = operation;
+    return transitioning;
 }
 
 @end
