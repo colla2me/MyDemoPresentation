@@ -7,12 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "Masonry.h"
 #import "CardCell.h"
 #import "WalletLayout.h"
 #import "MyCollectionView.h"
 #import "TableViewController.h"
 #import "SlideAnimatedTransitioning.h"
 #import "BottomModalViewController.h"
+#import <MagicalRecord/MagicalRecord.h>
+#import "Person+CoreDataClass.h"
+#import "StepSlider.h"
 
 #ifndef HEXColor
 #define HEXColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -21,6 +25,7 @@
 @interface ViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) MyCollectionView *collectionView;
 @property (nonatomic, strong) NSArray *cellInfo;
+@property (nonatomic, weak) UILabel *textLabel;
 @end
 
 @implementation ViewController
@@ -36,7 +41,100 @@ static NSString * const reuseIdentifier = @"CardCell";
     self.title = @"我的";
     self.navigationController.delegate = self;
 //    self.view.backgroundColor = [UIColor whiteColor];
+//    NSLog(@"fmod: %f", fmod(8.625, 0.75));
     
+//    [self createDataWithName:@"nicoal" age:22];
+//    [self createDataWithName:@"bob" age:24];
+//    [self createDataWithName:@"junier" age:25];
+
+//    [self createDataWithName:@"marina" age:22];
+//    [self createDataWithName:@"kotoko" age:21];
+//    [self createDataWithName:@"yoshita" age:19];
+    
+//    [self updateData];
+//    [self findData];
+    [self buildStepSliderView];
+}
+
+- (void)buildStepSliderView {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.layer.borderWidth = 1;
+    contentView.layer.borderColor = [UIColor orangeColor].CGColor;
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(300, 150));
+    }];
+    
+    StepSlider *slider = [[StepSlider alloc] init];
+    slider.maxValue = 0.4;
+    slider.minValue = 0.2;
+    slider.trackHeight = 6;
+    slider.numberStyle = NSNumberFormatterPercentStyle;
+    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [contentView addSubview:slider];
+    slider.backgroundColor = [UIColor yellowColor];
+    [slider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(50);
+        make.width.mas_equalTo(200);
+    }];
+    
+    UILabel *textLabel = [[UILabel alloc] init];
+    textLabel.textColor = [UIColor orangeColor];
+    textLabel.font = [UIFont systemFontOfSize:14];
+    [contentView addSubview:textLabel];
+    self.textLabel = textLabel;
+    [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(slider);
+        make.left.equalTo(slider.mas_right).offset(10);
+    }];
+}
+
+- (void)sliderValueChanged:(StepSlider *)slider {
+    NSLog(@"slider value is %.f", slider.value);
+    self.textLabel.text = slider.decimal;
+}
+
+- (void)createDataWithName:(NSString *)name age:(int)age {
+    Person *person = [Person MR_createEntity];
+    person.name = name;
+    person.job = @"engineer";
+    person.age = age;
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+}
+
+- (void)findData {
+    NSArray *persons = [Person MR_findAll];
+//    NSArray *personSorted = [Person MR_findAllSortedBy:@"name" ascending:YES];
+//    NSArray *personAgeEqual22 = [Person MR_findByAttribute:@"age" withValue:@26];
+    for (Person * person in persons) {
+        NSLog(@"%@  %@  %@  %@", person.name, person.job, @(person.age), @(person.sex));
+    }
+//    NSLog(@"%@  %@  %@  %@", person, personSorted, personAgeEqual20, personFirst);
+//    Person *personFirst = [Person MR_findFirst];
+//    NSLog(@"%@  %@  %@  %@", personFirst.name, personFirst.job, @(personFirst.age), @(personFirst.sex));
+}
+
+- (void)updateData {
+    NSArray *personAgeEqual22 = [Person MR_findByAttribute:@"age" withValue:@22];
+    Person *person = nil;
+    NSEnumerator *keyEnumerator = [personAgeEqual22 objectEnumerator];
+    NSArray *names = @[@"nishino", @"shirashi"];
+    NSUInteger index = 0;
+    while (person = [keyEnumerator nextObject]) {
+        person.name = names[index];
+        person.age = 24+index;
+        index++;
+    }
+    
+    for (Person * p in personAgeEqual22) {
+        p.job = @"UI Design";
+    }
+    
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+}
+
+- (void)setupWalletLayout {
     self.cellInfo = @[@{@"text": @"会员信息", @"color": HEXColor(0xfcc630)}, @{@"text": @"实体店铺", @"color": HEXColor(0xf8a032)}, @{@"text": @"我的奖品", @"color": HEXColor(0xf58b33)}, @{@"text": @"邀请好友", @"color": HEXColor(0xf47435)}, @{@"text": @"系统设置", @"color": [UIColor redColor]}, @{@"text": @"积分商城", @"color": [UIColor greenColor]}, @{@"text": @"每日生鲜", @"color": [UIColor magentaColor]}, @{@"text": @"配送到家", @"color": [UIColor yellowColor]}];
     [self.collectionView reloadData];
     
@@ -47,14 +145,14 @@ static NSString * const reuseIdentifier = @"CardCell";
     avatarView.layer.cornerRadius = 30;
     [self.view addSubview:avatarView];
     [avatarView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapAvatar)]];
-
+    
     CGRect rect = CGRectMake(CGRectGetMidX(self.view.frame) - 100, CGRectGetMaxY(avatarView.frame) + 8, 200, 20);
     UILabel *textLabel = [[UILabel alloc] initWithFrame:rect];
     textLabel.text = @"XXXX昵称";
     textLabel.font = [UIFont systemFontOfSize:16];
     textLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:textLabel];
-
+    
     CGRect rect1 = CGRectMake(CGRectGetMidX(self.view.frame) * 0.5 - 50, CGRectGetMaxY(textLabel.frame) + 8, 100, 40);
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setFrame:rect1];
@@ -90,8 +188,6 @@ static NSString * const reuseIdentifier = @"CardCell";
     self.collectionView.fanBtn = btn2;
     [self.collectionView registerClass:[CardCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.view addSubview:self.collectionView];
-    
-//    NSLog(@"fmod: %f", fmod(8.625, 0.75));
 }
 
 - (void)viewDidLayoutSubviews {

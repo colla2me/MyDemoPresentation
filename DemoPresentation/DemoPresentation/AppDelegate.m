@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MagicalRecord+Exception.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +15,16 @@
 
 @implementation AppDelegate
 
+static NSString * const STORENAMED = @"TD-tech.sqlite";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+//    [MagicalRecord setShouldDeleteStoreOnModelMismatch:YES];
+//    
+//    [MagicalRecord setupCoreDataStackWithStoreNamed:STORENAMED exceptionBlock:^(NSException *exception) {
+//        NSLog(@"exception: %@", exception);
+//    }];
+    
     return YES;
 }
 

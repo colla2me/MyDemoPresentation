@@ -14,11 +14,15 @@
 		7E78FF14216D03970013ED9F /* SemiModalPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */; };
 		7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF16216D03B20013ED9F /* TableViewController.m */; };
 		7EFD6F81216E452200027384 /* AIMultiDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFD6F80216E452200027384 /* AIMultiDelegate.m */; };
+		844995A5218A9EE000093685 /* FVScrollingStackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844995A4218A9EE000093685 /* FVScrollingStackViewController.m */; };
+		844995A8218AFBC300093685 /* StacksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844995A7218AFBC300093685 /* StacksViewController.m */; };
+		844995AB218AFBD200093685 /* DemoStackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844995AA218AFBD200093685 /* DemoStackViewController.m */; };
 		8459EED821746D5A00303525 /* SlideAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 8459EED621746D5A00303525 /* SlideAnimatedTransitioning.m */; };
 		8459EEDB21746FB400303525 /* BottomModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8459EEDA21746FB400303525 /* BottomModalViewController.m */; };
 		84758D3B215B7A1B00E56BCA /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D3A215B7A1B00E56BCA /* CardCell.m */; };
 		84758D3E215B7A4100E56BCA /* WalletLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D3D215B7A4100E56BCA /* WalletLayout.m */; };
 		84758D41215B82BC00E56BCA /* CardLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 84758D40215B82BC00E56BCA /* CardLayoutAttributes.m */; };
+		849275D9219B1CA200969469 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 849275D8219B1CA200969469 /* StepSlider.m */; };
 		84A397AE215F8A1800E9D15F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A39798215F8A1800E9D15F /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		84A397AF215F8A1800E9D15F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A397A4215F8A1800E9D15F /* MASCompositeConstraint.m */; };
 		84A397B0215F8A1800E9D15F /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A397A5215F8A1800E9D15F /* MASConstraintMaker.m */; };
@@ -34,9 +38,16 @@
 		84BB7AB62151E57B00B5876B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84BB7AB52151E57B00B5876B /* Assets.xcassets */; };
 		84BB7AB92151E57B00B5876B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84BB7AB72151E57B00B5876B /* LaunchScreen.storyboard */; };
 		84BB7ABC2151E57B00B5876B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BB7ABB2151E57B00B5876B /* main.m */; };
+		84FB5A4D218BF5BD003F7393 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84FB5A4B218BF5BD003F7393 /* TestModel.xcdatamodeld */; };
+		84FB5A5E218BF960003F7393 /* MagicalRecord+Exception.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FB5A5D218BF960003F7393 /* MagicalRecord+Exception.m */; };
+		84FB5A69218BFBC5003F7393 /* Person+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FB5A67218BFBC5003F7393 /* Person+CoreDataClass.m */; };
+		84FB5A6A218BFBC5003F7393 /* Person+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FB5A68218BFBC5003F7393 /* Person+CoreDataProperties.m */; };
+		ED58E8BC5746DCF14261D8A0 /* libPods-DemoPresentation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C114B69A0E7C06FBC6BAE5 /* libPods-DemoPresentation.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73C114B69A0E7C06FBC6BAE5 /* libPods-DemoPresentation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DemoPresentation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		754C549C5FAB44C6131434F6 /* Pods-DemoPresentation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoPresentation.release.xcconfig"; path = "Pods/Target Support Files/Pods-DemoPresentation/Pods-DemoPresentation.release.xcconfig"; sourceTree = "<group>"; };
 		7E1F6D70216F9440005CADBE /* SampleAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAlignedLayout.h; sourceTree = "<group>"; };
 		7E1F6D71216F9440005CADBE /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
 		7E1F6D72216F9441005CADBE /* SampleAlignedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleAlignedLayout.m; sourceTree = "<group>"; };
@@ -51,6 +62,12 @@
 		7E78FF16216D03B20013ED9F /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		7EFD6F7F216E452200027384 /* AIMultiDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIMultiDelegate.h; sourceTree = "<group>"; };
 		7EFD6F80216E452200027384 /* AIMultiDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIMultiDelegate.m; sourceTree = "<group>"; };
+		844995A3218A9EE000093685 /* FVScrollingStackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FVScrollingStackViewController.h; sourceTree = "<group>"; };
+		844995A4218A9EE000093685 /* FVScrollingStackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FVScrollingStackViewController.m; sourceTree = "<group>"; };
+		844995A6218AFBC300093685 /* StacksViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StacksViewController.h; sourceTree = "<group>"; };
+		844995A7218AFBC300093685 /* StacksViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StacksViewController.m; sourceTree = "<group>"; };
+		844995A9218AFBD200093685 /* DemoStackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoStackViewController.h; sourceTree = "<group>"; };
+		844995AA218AFBD200093685 /* DemoStackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoStackViewController.m; sourceTree = "<group>"; };
 		8459EED621746D5A00303525 /* SlideAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideAnimatedTransitioning.m; sourceTree = "<group>"; };
 		8459EED721746D5A00303525 /* SlideAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideAnimatedTransitioning.h; sourceTree = "<group>"; };
 		8459EED921746FB400303525 /* BottomModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomModalViewController.h; sourceTree = "<group>"; };
@@ -61,6 +78,8 @@
 		84758D3D215B7A4100E56BCA /* WalletLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLayout.m; sourceTree = "<group>"; };
 		84758D3F215B82BC00E56BCA /* CardLayoutAttributes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardLayoutAttributes.h; sourceTree = "<group>"; };
 		84758D40215B82BC00E56BCA /* CardLayoutAttributes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardLayoutAttributes.m; sourceTree = "<group>"; };
+		849275D7219B1CA200969469 /* StepSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StepSlider.h; sourceTree = "<group>"; };
+		849275D8219B1CA200969469 /* StepSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StepSlider.m; sourceTree = "<group>"; };
 		84A39790215F897E00E9D15F /* FVTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FVTextField.m; sourceTree = "<group>"; };
 		84A39793215F897E00E9D15F /* FVSmsCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FVSmsCodeView.m; sourceTree = "<group>"; };
 		84A39797215F8A1800E9D15F /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -96,6 +115,14 @@
 		84BB7AB82151E57B00B5876B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84BB7ABA2151E57B00B5876B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84BB7ABB2151E57B00B5876B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84FB5A4C218BF5BD003F7393 /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
+		84FB5A5C218BF960003F7393 /* MagicalRecord+Exception.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord+Exception.h"; sourceTree = "<group>"; };
+		84FB5A5D218BF960003F7393 /* MagicalRecord+Exception.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+Exception.m"; sourceTree = "<group>"; };
+		84FB5A65218BFBC5003F7393 /* Person+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+CoreDataProperties.h"; sourceTree = "<group>"; };
+		84FB5A66218BFBC5003F7393 /* Person+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Person+CoreDataClass.h"; sourceTree = "<group>"; };
+		84FB5A67218BFBC5003F7393 /* Person+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Person+CoreDataClass.m"; sourceTree = "<group>"; };
+		84FB5A68218BFBC5003F7393 /* Person+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Person+CoreDataProperties.m"; sourceTree = "<group>"; };
+		AE545BBB82BD87C17B1C309A /* Pods-DemoPresentation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoPresentation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DemoPresentation/Pods-DemoPresentation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED58E8BC5746DCF14261D8A0 /* libPods-DemoPresentation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +153,19 @@
 				7EFD6F80216E452200027384 /* AIMultiDelegate.m */,
 			);
 			path = MultiDelegate;
+			sourceTree = "<group>";
+		};
+		844995A2218A9E6000093685 /* ScrollingStackViewController */ = {
+			isa = PBXGroup;
+			children = (
+				844995A3218A9EE000093685 /* FVScrollingStackViewController.h */,
+				844995A4218A9EE000093685 /* FVScrollingStackViewController.m */,
+				844995A6218AFBC300093685 /* StacksViewController.h */,
+				844995A7218AFBC300093685 /* StacksViewController.m */,
+				844995A9218AFBD200093685 /* DemoStackViewController.h */,
+				844995AA218AFBD200093685 /* DemoStackViewController.m */,
+			);
+			path = ScrollingStackViewController;
 			sourceTree = "<group>";
 		};
 		84A39796215F8A1800E9D15F /* Masonry */ = {
@@ -163,6 +204,8 @@
 				84BB7AAB2151E57900B5876B /* DemoPresentation */,
 				84BB7AAA2151E57900B5876B /* Products */,
 				7E78FF11216CE5F10013ED9F /* Recovered References */,
+				9DA40648BAF3B7346100EFBC /* Pods */,
+				FD5B315FBC3F17382F34D0A2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,10 +220,15 @@
 		84BB7AAB2151E57900B5876B /* DemoPresentation */ = {
 			isa = PBXGroup;
 			children = (
+				84FB5A5A218BF8D7003F7393 /* Extensions */,
+				84FB5A4A218BF57E003F7393 /* ActiveRecord */,
+				844995A2218A9E6000093685 /* ScrollingStackViewController */,
 				7EFD6F7E216E452200027384 /* MultiDelegate */,
 				84A39796215F8A1800E9D15F /* Masonry */,
 				84BB7AAC2151E57900B5876B /* AppDelegate.h */,
 				84BB7AAD2151E57900B5876B /* AppDelegate.m */,
+				84BB7AAF2151E57900B5876B /* ViewController.h */,
+				84BB7AB02151E57900B5876B /* ViewController.m */,
 				7E1F6D73216F9441005CADBE /* SampleViewController.h */,
 				7E1F6D71216F9440005CADBE /* SampleViewController.m */,
 				7E1F6D70216F9440005CADBE /* SampleAlignedLayout.h */,
@@ -191,14 +239,14 @@
 				7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */,
 				8459EED721746D5A00303525 /* SlideAnimatedTransitioning.h */,
 				8459EED621746D5A00303525 /* SlideAnimatedTransitioning.m */,
-				84BB7AAF2151E57900B5876B /* ViewController.h */,
-				84BB7AB02151E57900B5876B /* ViewController.m */,
 				7E78FF15216D03B20013ED9F /* TableViewController.h */,
 				7E78FF16216D03B20013ED9F /* TableViewController.m */,
 				8459EED921746FB400303525 /* BottomModalViewController.h */,
 				8459EEDA21746FB400303525 /* BottomModalViewController.m */,
 				7E78FF0A216CDE220013ED9F /* MyCollectionView.h */,
 				7E78FF0B216CDE220013ED9F /* MyCollectionView.m */,
+				849275D7219B1CA200969469 /* StepSlider.h */,
+				849275D8219B1CA200969469 /* StepSlider.m */,
 				84BB7AB22151E57900B5876B /* Main.storyboard */,
 				84BB7AB52151E57B00B5876B /* Assets.xcassets */,
 				84BB7AB72151E57B00B5876B /* LaunchScreen.storyboard */,
@@ -210,8 +258,46 @@
 				84758D3D215B7A4100E56BCA /* WalletLayout.m */,
 				84758D3F215B82BC00E56BCA /* CardLayoutAttributes.h */,
 				84758D40215B82BC00E56BCA /* CardLayoutAttributes.m */,
+				84FB5A4B218BF5BD003F7393 /* TestModel.xcdatamodeld */,
 			);
 			path = DemoPresentation;
+			sourceTree = "<group>";
+		};
+		84FB5A4A218BF57E003F7393 /* ActiveRecord */ = {
+			isa = PBXGroup;
+			children = (
+				84FB5A65218BFBC5003F7393 /* Person+CoreDataProperties.h */,
+				84FB5A66218BFBC5003F7393 /* Person+CoreDataClass.h */,
+				84FB5A67218BFBC5003F7393 /* Person+CoreDataClass.m */,
+				84FB5A68218BFBC5003F7393 /* Person+CoreDataProperties.m */,
+			);
+			path = ActiveRecord;
+			sourceTree = "<group>";
+		};
+		84FB5A5A218BF8D7003F7393 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				84FB5A5C218BF960003F7393 /* MagicalRecord+Exception.h */,
+				84FB5A5D218BF960003F7393 /* MagicalRecord+Exception.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9DA40648BAF3B7346100EFBC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AE545BBB82BD87C17B1C309A /* Pods-DemoPresentation.debug.xcconfig */,
+				754C549C5FAB44C6131434F6 /* Pods-DemoPresentation.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FD5B315FBC3F17382F34D0A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73C114B69A0E7C06FBC6BAE5 /* libPods-DemoPresentation.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +307,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84BB7ABF2151E57B00B5876B /* Build configuration list for PBXNativeTarget "DemoPresentation" */;
 			buildPhases = (
+				02A45224B084BD8A23702DE1 /* [CP] Check Pods Manifest.lock */,
 				84BB7AA52151E57900B5876B /* Sources */,
 				84BB7AA62151E57900B5876B /* Frameworks */,
 				84BB7AA72151E57900B5876B /* Resources */,
@@ -279,6 +366,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		02A45224B084BD8A23702DE1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DemoPresentation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		84BB7AA52151E57900B5876B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -289,10 +397,14 @@
 				84BB7ABC2151E57B00B5876B /* main.m in Sources */,
 				7E78FF14216D03970013ED9F /* SemiModalPresentationController.m in Sources */,
 				84A397B2215F8A1800E9D15F /* NSArray+MASAdditions.m in Sources */,
+				844995A8218AFBC300093685 /* StacksViewController.m in Sources */,
+				849275D9219B1CA200969469 /* StepSlider.m in Sources */,
 				84A397AE215F8A1800E9D15F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				84FB5A4D218BF5BD003F7393 /* TestModel.xcdatamodeld in Sources */,
 				84A397B6215F8A1800E9D15F /* MASViewAttribute.m in Sources */,
 				84758D41215B82BC00E56BCA /* CardLayoutAttributes.m in Sources */,
 				7E1F6D78216F9441005CADBE /* SampleTagCell.m in Sources */,
+				844995A5218A9EE000093685 /* FVScrollingStackViewController.m in Sources */,
 				7E1F6D76216F9441005CADBE /* SampleViewController.m in Sources */,
 				84A397B1215F8A1800E9D15F /* MASLayoutConstraint.m in Sources */,
 				84A397B3215F8A1800E9D15F /* View+MASAdditions.m in Sources */,
@@ -300,11 +412,15 @@
 				84BB7AAE2151E57900B5876B /* AppDelegate.m in Sources */,
 				7EFD6F81216E452200027384 /* AIMultiDelegate.m in Sources */,
 				84758D3B215B7A1B00E56BCA /* CardCell.m in Sources */,
+				844995AB218AFBD200093685 /* DemoStackViewController.m in Sources */,
+				84FB5A6A218BFBC5003F7393 /* Person+CoreDataProperties.m in Sources */,
 				7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */,
 				8459EED821746D5A00303525 /* SlideAnimatedTransitioning.m in Sources */,
 				84758D3E215B7A4100E56BCA /* WalletLayout.m in Sources */,
 				7E1F6D77216F9441005CADBE /* SampleAlignedLayout.m in Sources */,
+				84FB5A69218BFBC5003F7393 /* Person+CoreDataClass.m in Sources */,
 				84A397B0215F8A1800E9D15F /* MASConstraintMaker.m in Sources */,
+				84FB5A5E218BF960003F7393 /* MagicalRecord+Exception.m in Sources */,
 				84A397B4215F8A1800E9D15F /* MASConstraint.m in Sources */,
 				84A397B5215F8A1800E9D15F /* MASViewConstraint.m in Sources */,
 				8459EEDB21746FB400303525 /* BottomModalViewController.m in Sources */,
@@ -445,6 +561,7 @@
 		};
 		84BB7AC02151E57B00B5876B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE545BBB82BD87C17B1C309A /* Pods-DemoPresentation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -462,6 +579,7 @@
 		};
 		84BB7AC12151E57B00B5876B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 754C549C5FAB44C6131434F6 /* Pods-DemoPresentation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -499,6 +617,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84FB5A4B218BF5BD003F7393 /* TestModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84FB5A4C218BF5BD003F7393 /* TestModel.xcdatamodel */,
+			);
+			currentVersion = 84FB5A4C218BF5BD003F7393 /* TestModel.xcdatamodel */;
+			path = TestModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84BB7AA12151E57900B5876B /* Project object */;
 }
