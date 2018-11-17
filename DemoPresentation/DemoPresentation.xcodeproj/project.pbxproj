@@ -14,6 +14,7 @@
 		7E78FF14216D03970013ED9F /* SemiModalPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF13216D03970013ED9F /* SemiModalPresentationController.m */; };
 		7E78FF17216D03B20013ED9F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E78FF16216D03B20013ED9F /* TableViewController.m */; };
 		7EFD6F81216E452200027384 /* AIMultiDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFD6F80216E452200027384 /* AIMultiDelegate.m */; };
+		843CA045219FE464009DDD18 /* ScaleSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 843CA044219FE464009DDD18 /* ScaleSlider.m */; };
 		844995A5218A9EE000093685 /* FVScrollingStackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844995A4218A9EE000093685 /* FVScrollingStackViewController.m */; };
 		844995A8218AFBC300093685 /* StacksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844995A7218AFBC300093685 /* StacksViewController.m */; };
 		844995AB218AFBD200093685 /* DemoStackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844995AA218AFBD200093685 /* DemoStackViewController.m */; };
@@ -62,6 +63,8 @@
 		7E78FF16216D03B20013ED9F /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		7EFD6F7F216E452200027384 /* AIMultiDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIMultiDelegate.h; sourceTree = "<group>"; };
 		7EFD6F80216E452200027384 /* AIMultiDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIMultiDelegate.m; sourceTree = "<group>"; };
+		843CA043219FE464009DDD18 /* ScaleSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScaleSlider.h; sourceTree = "<group>"; };
+		843CA044219FE464009DDD18 /* ScaleSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScaleSlider.m; sourceTree = "<group>"; };
 		844995A3218A9EE000093685 /* FVScrollingStackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FVScrollingStackViewController.h; sourceTree = "<group>"; };
 		844995A4218A9EE000093685 /* FVScrollingStackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FVScrollingStackViewController.m; sourceTree = "<group>"; };
 		844995A6218AFBC300093685 /* StacksViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StacksViewController.h; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 				7E78FF0B216CDE220013ED9F /* MyCollectionView.m */,
 				849275D7219B1CA200969469 /* StepSlider.h */,
 				849275D8219B1CA200969469 /* StepSlider.m */,
+				843CA043219FE464009DDD18 /* ScaleSlider.h */,
+				843CA044219FE464009DDD18 /* ScaleSlider.m */,
 				84BB7AB22151E57900B5876B /* Main.storyboard */,
 				84BB7AB52151E57B00B5876B /* Assets.xcassets */,
 				84BB7AB72151E57B00B5876B /* LaunchScreen.storyboard */,
@@ -404,6 +409,7 @@
 				84A397B6215F8A1800E9D15F /* MASViewAttribute.m in Sources */,
 				84758D41215B82BC00E56BCA /* CardLayoutAttributes.m in Sources */,
 				7E1F6D78216F9441005CADBE /* SampleTagCell.m in Sources */,
+				843CA045219FE464009DDD18 /* ScaleSlider.m in Sources */,
 				844995A5218A9EE000093685 /* FVScrollingStackViewController.m in Sources */,
 				7E1F6D76216F9441005CADBE /* SampleViewController.m in Sources */,
 				84A397B1215F8A1800E9D15F /* MASLayoutConstraint.m in Sources */,

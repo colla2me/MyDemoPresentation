@@ -17,6 +17,7 @@
 #import <MagicalRecord/MagicalRecord.h>
 #import "Person+CoreDataClass.h"
 #import "StepSlider.h"
+#import "ScaleSlider.h"
 
 #ifndef HEXColor
 #define HEXColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -58,25 +59,21 @@ static NSString * const reuseIdentifier = @"CardCell";
 
 - (void)buildStepSliderView {
     UIView *contentView = [[UIView alloc] init];
-    contentView.layer.borderWidth = 1;
-    contentView.layer.borderColor = [UIColor orangeColor].CGColor;
+    contentView.backgroundColor = [UIColor blueColor];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(300, 150));
+        make.size.mas_equalTo(CGSizeMake(150, 300));
     }];
     
-    StepSlider *slider = [[StepSlider alloc] init];
-    slider.maxValue = 0.4;
-    slider.minValue = 0.2;
-    slider.trackHeight = 6;
-    slider.numberStyle = NSNumberFormatterPercentStyle;
+    ScaleSlider *slider = [[ScaleSlider alloc] init];
+    slider.maxValue = 45;
+    slider.minValue = 0;
     [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [contentView addSubview:slider];
-    slider.backgroundColor = [UIColor yellowColor];
     [slider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(50);
-        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(180);
     }];
     
     UILabel *textLabel = [[UILabel alloc] init];
@@ -91,8 +88,8 @@ static NSString * const reuseIdentifier = @"CardCell";
 }
 
 - (void)sliderValueChanged:(StepSlider *)slider {
-    NSLog(@"slider value is %.f", slider.value);
-    self.textLabel.text = slider.decimal;
+//    NSLog(@"slider value is %.f", slider.value);
+    self.textLabel.text = @(slider.value).stringValue;
 }
 
 - (void)createDataWithName:(NSString *)name age:(int)age {
